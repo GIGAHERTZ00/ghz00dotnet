@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pageTitle   = "ぎがへのブログ";
+---
+
+<Layout pageTitle={pageTitle}>
+  <h1>Index of /</h1>
+  <div class="postsList">
+    <span class="total">Total: 4</span>
+    <table>
+      <thead>
+        <tr>
+          <td class="title">Title</td>
+          <td>Description</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="title"><a href="./about">about</a></td>
+          <td>About this site.</td>
+        </tr>
+        <tr>
+          <td class="title"><a href="./categories">categories/</a></td>
+          <td>カテゴリ別</td>
+        </tr>
+        <tr>
+          <td class="title"><a href="./posts">posts/</a></td>
+          <td>全記事一覧</td>
+        </tr>
+        <tr>
+          <td class="title"><a href="./tags">tags/</a></td>
+          <td>タグ別</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</Layout>

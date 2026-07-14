@@ -1,0 +1,86 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+//const allPosts = await Astro.glob('../posts/*.md');
+//const tags = [...new Set(allPosts.map((post) => post.frontmatter.tags).flat())];
+//if(tags.includes("none")){
+//  const noneIdx = tags.indexOf("none");
+//  [ tags[noneIdx] , tags[tags.length-1] ] = [ tags[tags.length-1] , [tags[noneIdx]] ];
+//}
+
+const modules = import.meta.glob("../posts/*.md", { eager: true });
+const tagDatas = {};
+const allTagDatas = {
+  count:              0,
+  latestUpdatedDate:  new Date(0),
+};
+for(const path in modules){
+  const post = modules[path];
+  const tagList = post.frontmatter?.tags ?? [];
+  const latestUpdatedDate = new Date(post.frontmatter?.updatedDate);
+  for(const tag of tagList){
+    if(!tagDatas[tag]){
+      tagDatas[tag] = {
+        count:              1,
+        latestUpdatedDate:  latestUpdatedDate,
+      };
+    } else {
+      ++tagDatas[tag].count;
+      if(latestUpdatedDate > tagDatas[tag].latestUpdatedDate){
+        tagDatas[tag].latestUpdatedDate = latestUpdatedDate;
+      }
+    }
+    ++allTagDatas.count;
+    if(latestUpdatedDate > allTagDatas.latestUpdatedDate){
+      allTagDatas.latestUpdatedDate = latestUpdatedDate;
+    }
+  }
+}
+
+const tags = Object.keys(tagDatas);
+if(tags.includes("none")){
+  const noneIdx = tags.indexOf("none");                                               
+  [ tags[noneIdx] , tags[tags.length-1] ] = [ tags[tags.length-1] , [tags[noneIdx]] ];
+}
+
+const tagsTotal = tags.length;
+---
+
+<Layout pageTitle="/tags/">
+  <div>
+    <h1>Index of /tags/</h1>
+    <div class="tagsList">
+      <span class="total">Total: {tagsTotal}</span>
+      <table>
+        <thead>
+          <tr>
+            <td class="name">Name</td>
+            <td class="date"><strong>Date</strong></td>
+            <td class="size">Total</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">tags/</td>
+            <!-- <td class="date">{new Date(allTagDatas.latestUpdatedDate).toLocaleDateString("ja-JP", {timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit"}).replaceAll('/', '-')}</td> -->
+            <!-- <td class="length">{allTagDatas.count}</td> -->
+            <td class="date"></td>
+            <td class="size"></td>
+          </tr>
+          {tags.slice(0,-1).map((tag) => (
+            <tr>
+              <td class="name"><a href={`/tags/${tag}`}>├{tag}/ </a></td>
+              <td class="date">{new Date(tagDatas[tag].latestUpdatedDate).toLocaleDateString("ja-JP", {timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit"}).replaceAll('/', '-')}</td>
+              <td class="size">{tagDatas[tag].count}</td>
+            </tr>
+          ))}
+          <tr>
+            <td class="name"><a href={`/tags/${tags.at(-1)}`}>└{tags.at(-1)}/</a></td>
+            <td class="date">{new Date(tagDatas[tags.at(-1)].latestUpdatedDate).toLocaleDateString("ja-JP", {timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit"}).replaceAll('/', '-')}</td>
+            <td class="size">{tagDatas[tags.at(-1)].count}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</Layout>

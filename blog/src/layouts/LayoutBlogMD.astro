@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout pageTitle={frontmatter.title}>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+  <div id=info>
+    <h1 id="postTitle">{frontmatter.title}</h1>
+    <table>
+      <tbody>
+        <tr>
+          <td>CreaatedDate:</td>
+          <td>{new Date(frontmatter.createdDate).toLocaleDateString("ja-JP", {timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit"}).replaceAll('/', '-')+'T'+new Date(frontmatter.createdDate).toLocaleTimeString("ja-JP", {timeZone: "Asia/Tokyo", hour: "2-digit", minute: "2-digit", second: "2-digit"}).replaceAll('/', '-')+"+09:00"}</td>
+        </tr>
+        <tr>
+          <td>UpdatedDate:</td>
+          <td>{new Date(frontmatter.updatedDate).toLocaleDateString("ja-JP", {timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit"}).replaceAll('/', '-')+'T'+new Date(frontmatter.updatedDate).toLocaleTimeString("ja-JP", {timeZone: "Asia/Tokyo", hour: "2-digit", minute: "2-digit", second: "2-digit"}).replaceAll('/', '-')+"+09:00"}</td>
+        </tr>
+        <tr>
+          <td>Author:</td>
+          <td>{frontmatter.author}</td>
+        </tr>
+        <tr>
+          <td>Category:</td>
+          <td class="no-underline"><a href={`/categories/${frontmatter.category}`}>{frontmatter.category}</a></td>
+        </tr>
+        <tr>
+          <td>{frontmatter.tags.length === 1 && frontmatter.tags[0] !== "none" ? "Tag:" : "Tags:"}</td>
+          <td class="no-underline">{frontmatter.tags.length < 1 || frontmatter.tags.length === 1 && frontmatter.tags[0] === "none" ? <a href="/tags/none/">none</a> : <span>[ {frontmatter.tags.slice(0,-1).map((tag) => <a href={`/tags/${tag}`}>"{tag}"</a><span> , </span>)}{<a href={`/tags/${frontmatter.tags.at(-1)}`}>"{frontmatter.tags.at(-1)}"</a>} ]</span>}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id=main>
+    <slot />
+  </div>
+</Layout>
+
+<style>
+  #postTitle {
+/*    font-size: 2.5rem;*/
+  }
+
+  #info {
+    table {
+      border-spacing: 1rem 0rem;
+    }
+  }
+
+  #main {
+    table,th,td {
+      border: 1px solid #7f7f7f;
+      border-collapse: collapse;
+      padding: 0.5em;
+    }
+
+    thead {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+  }
+</style>

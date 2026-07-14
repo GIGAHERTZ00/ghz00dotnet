@@ -1,0 +1,19 @@
+---
+import Navigation from "./Navigation.astro";
+import ThemeSwitcher from "./ThemeSwitcher.astro";
+// import Hamburger  from "./Hamburger.astro";
+
+const {currPageTitle} = Astro.props;
+---
+
+<header>
+  <div id="top">
+    <h1>ぎがへのブログ</h1>
+    <ThemeSwitcher />
+  </div>
+  <div style="opacity: 0.7;">GIGAHERTZ00's blog</div>
+  <nav>
+    <Navigation currPageTitle={currPageTitle}/>
+  </nav>
+</header>
+

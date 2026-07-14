@@ -1,0 +1,205 @@
+---
+import Header from "../components/Header.astro"
+import Footer from "../components/Footer.astro"
+
+const {pageTitle} = Astro.props;
+const ogpTitle = pageTitle + " | blog.ghz00.net";
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{pageTitle} | blog.ghz00.net</title>
+    <meta name="description" content="ぎがへ's ぶろぐ">
+    <meta property="og:title" content={ogpTitle}>
+    <meta property="og:type" content="blog">
+    <meta property="og:url" content="https://blog.ghz00.net/">
+    <meta property="og:image" content="https://blog.ghz00.net/favicon.png">
+    <script is:inline>
+      (function() {
+        const theme = localStorage.getItem('theme') ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="contents">
+      <div>
+        <Header currPageTitle={pageTitle}/>
+        <hr>
+      </div>
+      <div>
+        <slot />
+      </div>
+      <div>
+        <Footer />
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  :root {
+    --bgColor:       #e8ecef;  
+    --bodyBgColor:  #eaf4fc;
+    --fontColor:     #2e2930;
+    --borderColor:   #949495;
+  }
+  .dark {
+    --bgColor:       #1A1A19;  
+    --bodyBgColor:  #252424;
+    --fontColor:     #eaf4fc;
+    --borderColor:   #949495;
+  }
+
+  html {
+    background-color: var(--bgColor);
+    color:            var(--fontColor);
+    font-family:      sans-serif;
+    font:             "UDEV Gothic NF";
+    line-height:      1.5;
+    transition:       0.5s;
+    a {
+      color: #0080FF;
+    }
+
+    a:visited {
+      color: #0080FF;
+    }
+
+    
+
+    body {
+      margin:           0rem auto;
+      width:            100%;
+      max-width:        0096ch;
+      min-height:       100vh;
+      padding:          3rem 0;
+
+      #contents {
+        border-radius:    1rem;
+        border:           2px solid var(--borderColor);
+        padding:          2rem;
+        min-height:       calc(100vh - 6rem);
+        margin:           0;
+        background-color: var(--bodyBgColor);
+        display:          grid;
+        grid-template-rows: auto 1fr auto;
+
+        header {
+          #top {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            padding:  0;
+            margin:   0;
+            h1 {
+              padding: 0;
+              margin:  0;
+            }
+          }
+          .nav-links {
+            line-height: 1.1rem;
+            a {
+              text-decoration: none;
+            }
+          }
+        }
+
+        footer {
+          text-align: center;
+          margin:     0;
+        }
+
+        table {
+          thead {
+            font-weight: bold;
+          }
+        }
+
+        .no-underline {
+          a {
+            text-decoration: none;
+          }
+        }
+
+        .postsList{
+          width: 100%;
+          .total{
+            font-weight: bold;
+            font-size:   1.25rem;
+          }
+          table {
+            width: 100%;
+            .title{
+              text-align: left;
+            }
+            .date {
+              text-align: right;
+  /*            font-weight: normal;*/
+            }
+          }
+        }
+        .tagsList{
+          width: 100%;
+          .total {
+            font-weight:  bold;
+            font-size:    1.25rem;
+          }
+          table{
+            width: 100%;
+            .name {
+              text-align: left;
+            }
+            .date {
+              width:      30%;
+              text-align: left;
+            }
+            .size {
+              width:      15%;
+              text-align: left;
+            }
+          }
+        }
+        .categoriesList{
+          width: 100%;
+          .total {
+            font-weight:  bold;
+            font-size:    1.25rem;
+          }
+          table{
+            width: 100%;
+            .name {
+              text-align: left;
+            }
+            .date {
+              width:      30%;
+              text-align: left;
+            }
+            .size {
+              width:      15%;
+              text-align: left;
+            }
+          }
+        }
+      }
+    }
+
+
+    
+  }
+
+  
+  * {
+    box-sizing: border-box;
+  }
+
+
+</style>

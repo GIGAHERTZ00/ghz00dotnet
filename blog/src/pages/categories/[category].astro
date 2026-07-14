@@ -1,0 +1,49 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const { category } = Astro.params;
+const {  posts   } = Astro.props;
+const postsTotal   = posts.length;
+// console.log(filteredPosts);
+
+export async function getStaticPaths() {
+  const allPosts = Object.values(import.meta.glob("../posts/*.md", { eager: true }));
+  const uniqueCategories = [...new Set(allPosts.map((post) => post.frontmatter.category).flat())];
+  return uniqueCategories.map((category) => {
+    const filteredPosts = allPosts.filter((post) => post.frontmatter.category.includes(category));
+    return {
+      params: { category },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+---
+
+<Layout pageTitle={`/categories/${category}`}>
+  <p>
+    <a href="/categories/">categories/</a><br>
+    └{category}/&ensp;&lt;
+  </p>
+  <h1>Index of /categories/{category}</h1>
+  <div class="postsList">
+    <span class="total">Total: {postsTotal}</span>
+    <table>
+      <thead>
+        <tr>
+          <td class="title">Title</td>
+          <td>Description</td>
+          <td class="date">Date</td>
+        </tr>
+      </thead>
+      <tbody>
+        {posts.toSorted((a,b) => new Date(b.frontmatter.createdDate).getTime() - new Date(a.frontmatter.createdDate).getTime()).map((post) =>
+          <tr>
+            <td class="title"><a href={post.url}>{post.frontmatter.title}</a></td>
+            <td>{post.frontmatter.description}</td>
+            <td class="date">{new Date(post.frontmatter.createdDate).toLocaleDateString("ja-JP", {timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit"}).replaceAll('/', '-')}</td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+</Layout>

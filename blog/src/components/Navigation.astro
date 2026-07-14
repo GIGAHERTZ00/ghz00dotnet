@@ -1,0 +1,13 @@
+---
+const {currPageTitle} = Astro.props;
+---
+
+<div class="nav-links">
+  <p>
+    {currPageTitle.includes("ぎがへのブログ") ? <span>/&ensp;&lt;</span> : <a href={`/`}>/&ensp;</a>}<br>
+    ├ {currPageTitle.includes("/about") ? <span>about&ensp;&lt;</span> : <a href={`/about`}>about</a>}<br>
+    ├ {currPageTitle.includes("/categories/") ? <span>categories/&ensp;&lt;</span> : <a href={`/categories`}>categories/</a>}<br>
+    ├ {currPageTitle.includes("/posts/") ? <span>posts/&ensp;&lt;</span> : <a href={`/posts`}>posts/</a>}<br>
+    └ {currPageTitle.includes("/tags/") ? <span>tags/&ensp;&lt;</span> : <a href={`/tags`}>tags/</a>}
+  </p>
+</div>

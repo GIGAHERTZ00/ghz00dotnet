@@ -1,0 +1,33 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const allPosts    = Object.values(import.meta.glob("./*.md", { eager: true }));
+const pageTitle   = "/posts/";
+const postsTotal  = allPosts.length;
+---
+
+<Layout pageTitle={pageTitle}>
+  <h1>Index of /posts/</h1>
+    <div class="postsList">
+    <span class="total">Total: {postsTotal}</span>
+    <table>
+      <thead>
+        <tr>
+          <td class="title">Title</td>
+          <td>Description</td>
+          <th class="date">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {allPosts.toSorted((a,b) => new Date(b.frontmatter.createdDate).getTime() - new Date(a.frontmatter.createdDate).getTime()).map((post) =>
+          <tr>
+            <td class="title"><a href={post.url}>{post.frontmatter.title}</a></td>
+            <td>{post.frontmatter.description}</td>
+            {/*<th class="date">{new Date(post.frontmatter.date).toLocaleDateString("ja-JP", {timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit"}).replaceAll('/', '-')+'T'+new Date(post.frontmatter.date).toLocaleTimeString("ja-JP", {timeZone: "Asia/Tokyo", hour: "2-digit", minute: "2-digit", second: "2-digit"}).replaceAll('/', '-')+"+09:00"}</th>*/}
+            <td class="date">{new Date(post.frontmatter.createdDate).toLocaleDateString("ja-JP", {timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit"}).replaceAll('/', '-')}</td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+</Layout>

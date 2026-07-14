@@ -1,0 +1,81 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+// const allPosts = await Astro.glob('../posts/*.md');
+// const categories = [...new Set(allPosts.map((post) => post.frontmatter.category).flat())];
+
+const modules = import.meta.glob("../posts/*.md", { eager: true });
+const categoryDatas = {};
+const allCategoryDatas = {
+  count:              0,
+  latestUpdatedDate:  new Date(0),
+};
+for(const path in modules){
+  const post = modules[path];
+  const category = post.frontmatter?.category;
+  const latestUpdatedDate = new Date(post.frontmatter?.updatedDate);
+  if(!categoryDatas[category]){
+    categoryDatas[category] = {
+      count:              1,
+      latestUpdatedDate:  latestUpdatedDate,
+    };
+  } else {
+    ++categoryDatas[category].count;
+    if(latestUpdatedDate > categoryDatas[category].latestUpdatedDate){
+      categoryDatas[category].latestUpdatedDate = latestUpdatedDate;
+    }
+  }
+  ++allCategoryDatas.count;
+  if(latestUpdatedDate > allCategoryDatas.latestUpdatedDate){
+    allCategoryDatas.latestUpdatedDate = latestUpdatedDate;
+  }
+}
+
+const categories = Object.keys(categoryDatas);
+if(categories.includes("none")){
+  const noneIdx = categories.indexOf("none");                                               
+  [ categories[noneIdx] , categories[categories.length-1] ] = [ categories[categories.length-1] , [categories[noneIdx]] ];
+}
+
+const categoriesTotal = categories.length;
+
+---
+
+<Layout pageTitle="/categories/">
+  <div>
+    <h1>Index of /categories/</h1>
+    <div class="categoriesList">
+      <span class="total">Total: {categoriesTotal}</span>
+      <table>
+        <thead>
+          <tr>
+            <td class="name">Name</td>
+            <td class="date"><strong>Date</strong></td>
+            <td class="size">Total</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">categories/</td>
+            <!-- <td class="date">{new Date(allcategoryDatas.latestUpdatedDate).toLocaleDateString("ja-JP", {timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit"}).replaceAll('/', '-')}</td> -->
+            <!-- <td class="length">{allcategoryDatas.count}</td> -->
+            <td class="date"></td>
+            <td class="size"></td>
+          </tr>
+          {categories.slice(0,-1).map((category) => (
+            <tr>
+              <td class="name"><a href={`/categories/${category}`}>├{category}/ </a></td>
+              <td class="date">{new Date(categoryDatas[category].latestUpdatedDate).toLocaleDateString("ja-JP", {timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit"}).replaceAll('/', '-')}</td>
+              <td class="size">{categoryDatas[category].count}</td>
+            </tr>
+          ))}
+          <tr>
+            <td class="name"><a href={`/categories/${categories.at(-1)}`}>└{categories.at(-1)}/</a></td>
+            <td class="date">{new Date(categoryDatas[categories.at(-1)].latestUpdatedDate).toLocaleDateString("ja-JP", {timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit"}).replaceAll('/', '-')}</td>
+            <td class="size">{categoryDatas[categories.at(-1)].count}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</Layout>
