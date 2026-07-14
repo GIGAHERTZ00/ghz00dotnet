@@ -1,0 +1,12 @@
+{
+	"description": "A simple vibe.d server application to automate updates to sites on subdomains of ghz00.net.",
+	"dependencies": {
+		"vibe-d": "~>0.9"
+	},
+	"authors": [
+		"gigahertz00"
+	],
+	"copyright": "Copyright © 2026, gigahertz00",
+	"license": "MIT",
+	"name": "update"
+}
