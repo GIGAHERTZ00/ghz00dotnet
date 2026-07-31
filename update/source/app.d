@@ -64,7 +64,7 @@ void updater(JSONValue payload){
   }
   SubSite[] subSites = [
     SubSite("blog/","../blog", ["pnpm","build"], false),
-//    SubSite("root/","../root", "pnpm build", false),
+    SubSite("www/","../www", "pnpm build", false),
   ];
   foreach (commit; payload["commits"].array) {
     foreach (file; commit["modified"].array ~ commit["added"].array ~ commit["removed"].array) {
