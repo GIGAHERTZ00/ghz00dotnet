@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const pageTitle   = "ぎがへのページ";
+---
+
+<Layout pageTitle={pageTitle}>
+  <h1>ようこそ</h1>
+  <p>
+    なんと、ここはぎがへのページです。<br>
+    <a href="https://astro.build/" target="_blank" rel="noopener noreferrer">Astro</a>製です。
+  </p>
+  <h1>about me</h1>
+  <p>
+    元市立高専生です。2026年現在、情報工学系志望の浪人生をやっております。
+  </p>
+  <h2>軽い来歴とか</h2>
+  <table class="table_lines">
+    <thead>
+      <tr>
+        <th>YYYY-MM</th>
+        <th>出来事</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>2006-04</td>
+        <td>誕生</td>
+      </tr>
+      <tr>
+        <td>2013-03</td>
+        <td>幼卒</td>
+      </tr>
+      <tr>
+        <td>2019-03</td>
+        <td>小卒</td>
+      </tr>
+      <tr>
+        <td>2022-03</td>
+        <td>中卒</td>
+      </tr>
+      <tr>
+        <td>2022-04</td>
+        <td>高専入学</td>
+      </tr>
+      <tr>
+        <td>2025-04</td>
+        <td><a href="https://blog.ghz00.net/posts/ronin/">高専留年</a>,休学</td>
+      </tr>
+      <tr>
+        <td>2026-03</td>
+        <td>高専退学</td>
+      </tr>
+    </tbody>
+  </table>
+</Layout>
