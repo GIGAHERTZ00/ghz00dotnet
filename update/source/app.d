@@ -65,6 +65,7 @@ void updater(JSONValue payload){
   SubSite[] subSites = [
     SubSite("blog/","../blog", ["pnpm","build"], false),
     SubSite("www/","../www", ["pnpm","build"], false),
+    SubSite("update/","../update", ["dub","build","&&","systemctl","--user","restart","ghz00dotnet-update.service"], false),
   ];
   foreach (commit; payload["commits"].array) {
     foreach (file; commit["modified"].array ~ commit["added"].array ~ commit["removed"].array) {
