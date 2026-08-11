@@ -2,7 +2,7 @@
 layout:       ../../layouts/LayoutBlogMD.astro
 title:        "アイコンの話"
 createdDate:  2026-08-10T12:10:37+09:00
-updatedDate:  2026-08-10T12:10:37+09:00
+updatedDate:  2026-08-11T19:12:49+09:00
 description:  "実は第4世代"
 author:       "GIGAHERTZ00"
 category:     "diary"
@@ -36,7 +36,7 @@ Twitterアカウント開設に伴い、そのへんにあったフリ素画像�
 
 第3期で作ったモノの中身をエディタで見たら座標ぐっちゃぐちゃで気持ち悪いなということに気付き、座標のきれいなやつを作ろうと思い立った。その際、(意味があるのかは知らんが)縮尺を自由に変えられるようにしようと思い、D言語にて欲しいサイズを入力するとそのサイズのアイコンが出てくるプログラムを組んだ。ついでに角のRを指定することができるようにした。何かの間違いで御入用になった方はどうぞ(~~発狂してしまうので中身は見ない方がいい~~)(弁明すると、IESと改行とコード内のインデント、この全てを成立させる方法が見当らなかった)。  
 
-[GHz00IconGenerator](https://repo.ghz00.net/images/icons/gen4/GHz00IconGenerator.d)  
+[GHz00IconGenerator](https://github.com/GIGAHERTZ00/pg/blob/master/d/icongen/GHz00IconGenerator.d)  
 
 
 御使用の際は生成後に[SVG Viewer](https://www.svgviewer.dev/)とかで圧縮した方がいいかも。
