@@ -11,7 +11,7 @@ const { frontmatter } = Astro.props;
     <table>
       <tbody>
         <tr>
-          <td>CreaatedDate:</td>
+          <td>CreatedDate:</td>
           <td>{new Date(frontmatter.createdDate).toLocaleDateString("ja-JP", {timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit"}).replaceAll('/', '-')+'T'+new Date(frontmatter.createdDate).toLocaleTimeString("ja-JP", {timeZone: "Asia/Tokyo", hour: "2-digit", minute: "2-digit", second: "2-digit"}).replaceAll('/', '-')+"+09:00"}</td>
         </tr>
         <tr>
