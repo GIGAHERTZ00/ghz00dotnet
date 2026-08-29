@@ -36,8 +36,8 @@ const ogpTitle = pageTitle + " | blog.ghz00.net";
         <Header currPageTitle={pageTitle}/>
         <hr>
       </div>
-      <div>
-        <slot />
+      <div role="main">
+        <slot/>
       </div>
       <div>
         <Footer />
@@ -48,16 +48,18 @@ const ogpTitle = pageTitle + " | blog.ghz00.net";
 
 <style>
   :root {
-    --bgColor:       #e8ecef;  
+    --bgColor:      #e8ecef;  
     --bodyBgColor:  #eaf4fc;
-    --fontColor:     #2e2930;
-    --borderColor:   #949495;
+    --fontColor:    #2e2930;
+    --borderColor:  #949495;
+    --accentColor:  #0000FF;
   }
   .dark {
-    --bgColor:       #1A1A19;  
+    --bgColor:      #1A1A19;  
     --bodyBgColor:  #252424;
-    --fontColor:     #eaf4fc;
-    --borderColor:   #949495;
+    --fontColor:    #eaf4fc;
+    --borderColor:  #949495;
+    --accentColor:  #6CB8FF;
   }
 
   html {
@@ -68,11 +70,11 @@ const ogpTitle = pageTitle + " | blog.ghz00.net";
     line-height:      1.5;
     transition:       0.5s;
     a {
-      color: #0080FF;
+      color: var(--accentColor);
     }
 
     a:visited {
-      color: #0080FF;
+      color: var(--accentColor);
     }
 
     
@@ -85,8 +87,8 @@ const ogpTitle = pageTitle + " | blog.ghz00.net";
       padding:    calc(sign(100lvw - 96ch) * 3rem) 0;
 
       #contents {
-        border-radius:      calc(max(0,sign(100lvw - 96ch)) * 1rem);
-        border:             calc(max(0,sign(100lvw - 96ch)) * 2px) solid var(--borderColor);
+        border-radius:      1rem;
+        border:             2px solid var(--borderColor);
         padding:            2rem;
         min-height:         calc((100vh - max(0,sign(100lvw - 96ch)) * 6rem));
         margin:             0;
