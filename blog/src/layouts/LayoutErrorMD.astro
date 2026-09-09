@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout pageTitle={frontmatter.title}>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+  <div id=info>
+    <h1 id="postTitle">{frontmatter.title}</h1>
+    <table>
+      <tbody>
+        <tr>
+          <td>Status Code:</td>
+          <td class="no-underline"><a href={`https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Status/${frontmatter.code}`}>{frontmatter.code}</a></td>
+        </tr>
+        <tr>
+          <td>Category:</td>
+          <td>{frontmatter.category}</td>
+        </tr>
+        <tr>
+          <td>Description:</td>
+          <td>{frontmatter.description}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id=main>
+    <slot />
+  </div>
+</Layout>
+
+<style>
+  #postTitle {
+/*    font-size: 2.5rem;*/
+  }
+
+  #info {
+    table {
+      border-spacing: 1rem 0rem;
+    }
+  }
+
+  #main {
+    table,th,td {
+      border: 1px solid #7f7f7f;
+      border-collapse: collapse;
+      padding: 0.5em;
+    }
+
+    thead {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+  }
+</style>

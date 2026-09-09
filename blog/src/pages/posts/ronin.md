@@ -56,26 +56,6 @@ tags:         ["none"]
 
 岡山県大を受けた。中期やってるやん^^ってだけで碌に調べもせず出願したので、受験の際に初めて周囲の環境を認識してびっくらこいた。
 
-<details><summary>要約すると、こう。</summary>
-
-田舎をdisる歌  
-作詞・作曲 中居正広  
-歌 知らん  
-
-いーーーーーーーーーーーーーーーなか  
-やばすぎwwwwwwwwwwww  
-wwwwwwwwwwwwwwww  
-wwwwwwwwwwwwwwww  
-wwwwwwwwwwwwwwww  
-wwwwwwwwwwwwwwww  
-wwwwwwwwwwwwwwww  
-
-クソ
-
-過疎wwww
-  
-</details>
-
 帰りに倉敷観光をした。アイビースクエアに行ったところ、倉紡記念館が無料解放をしていたのでありがたく入らせてもらった。近代日本における繊維産業の力強さをありありと感じられた。やはりこの国は産業に力を入れないとダメだと思う。~~何が観光立国だ。~~
 
 ちなみに受かってた。
