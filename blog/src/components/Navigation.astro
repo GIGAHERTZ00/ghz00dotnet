@@ -2,7 +2,7 @@
 const {currPageTitle} = Astro.props;
 ---
 
-<div class="nav-links">
+<div class="nav-links" role="navigation">
   <p>
     {currPageTitle.includes("ぎがへのブログ") ? <span>/&ensp;&lt;</span> : <a href={`/`}>/&ensp;</a>}<br>
     ├ {currPageTitle.includes("/about") ? <span>about&ensp;&lt;</span> : <a href={`/about`}>about</a>}<br>
