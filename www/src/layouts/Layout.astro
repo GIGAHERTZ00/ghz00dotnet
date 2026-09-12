@@ -36,7 +36,7 @@ const ogpTitle = pageTitle + " | ghz00.net";
         <Header currPageTitle={pageTitle}/>
         <hr>
       </div>
-      <div>
+      <div role="main">
         <slot />
       </div>
       <div>
@@ -48,16 +48,18 @@ const ogpTitle = pageTitle + " | ghz00.net";
 
 <style>
   :root {
-    --bgColor:       #e8ecef;  
+    --bgColor:      #e8ecef;  
     --bodyBgColor:  #eaf4fc;
-    --fontColor:     #2e2930;
-    --borderColor:   #949495;
+    --fontColor:    #2e2930;
+    --borderColor:  #949495;
+    --accentColor:  #0000FF;
   }
   .dark {
-    --bgColor:       #1A1A19;  
+    --bgColor:      #1A1A19;  
     --bodyBgColor:  #252424;
-    --fontColor:     #eaf4fc;
-    --borderColor:   #949495;
+    --fontColor:    #eaf4fc;
+    --borderColor:  #949495;
+    --accentColor:  #6CB8FF;
   }
 
   html {
