@@ -1,0 +1,122 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const { error, category } = Astro.props;
+
+export async function getStaticPaths(){
+  const errors = [
+    {
+      category: "Client Error",
+      errors:   [
+        { code: 400 ,description: "Bad Request"},
+        { code: 401 ,description: "Unauthorized"},
+        { code: 402 ,description: "Payment Required"},
+        { code: 403 ,description: "Forbidden"},
+        { code: 404 ,description: "Not Found"},
+        { code: 405 ,description: "Method Not Allowed"},
+        { code: 406 ,description: "Not Acceptable"},
+        { code: 407 ,description: "Proxy Authentication Required"},
+        { code: 408 ,description: "Request Timeout"},
+        { code: 409 ,description: "Conflict"},
+        { code: 410 ,description: "Gone"},
+        { code: 411 ,description: "Length Required"},
+        { code: 412 ,description: "Precondition Failed"},
+        { code: 413 ,description: "Content Too Large"},
+        { code: 414 ,description: "URI Too Long"},
+        { code: 415 ,description: "Unsupported Media Type"},
+        { code: 416 ,description: "Range Not Satisfiable"},
+        { code: 417 ,description: "Expectation Failed"},
+        { code: 418 ,description: "I'm a teapot"},
+        { code: 421 ,description: "Misdirected Request"},
+        { code: 422 ,description: "Unprocessable Content"},
+        { code: 423 ,description: "Locked"},
+        { code: 424 ,description: "Failed Dependency"},
+        { code: 425 ,description: "Too Early"},
+        { code: 426 ,description: "Upgrade Required"},
+        { code: 428 ,description: "Precondition Required"},
+        { code: 429 ,description: "Too Many Requests"},
+        { code: 431 ,description: "Request Header Fields Too Large"},
+        { code: 451 ,description: "Unavailable For Legal Reasons"},
+      ]
+    },{
+      category: "Server Error",
+      errors:   [
+        { code: 500 ,description: "Internal Server Error"},
+        { code: 501 ,description: "Not Implemented"},
+        { code: 502 ,description: "Bad Gateway"},
+        { code: 503 ,description: "Service Unavailable"},
+        { code: 504 ,description: "Gateway Timeout"},
+        { code: 505 ,description: "HTTP Version Not Supported"},
+        { code: 506 ,description: "Variant Also Negotiates"},
+        { code: 507 ,description: "Insufficient Storage"},
+        { code: 508 ,description: "Loop Detected"},
+        { code: 510 ,description: "Not Extended"},
+        { code: 511 ,description: "Network Authentication Required"},
+      ]
+    }
+  ];
+
+  return errors.flatMap((category) =>
+    category.errors.map((error) => ({
+      params: {
+        error: String(error.code),
+      },
+      props: {
+        error,
+        category: category.category,
+      },
+    })),
+  );
+}
+---
+
+<Layout pageTitle="Error">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+  <div id=info>
+    <h1>An error has occured</h1>
+    <table>
+      <tbody>
+        <tr>
+          <td>Status Code:</td>
+          <td class="no-underline"><a href={`https://developer.mozilla.org/ja/docs/Web/HTTP/Reference/Status/${error.code}`}>{error.code}</a></td>
+        </tr>
+        <tr>
+          <td>Category:</td>
+          <td>{category}</td>
+        </tr>
+        <tr>
+          <td>Description:</td>
+          <td>{error.description}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id=main>
+    <slot />
+  </div>
+</Layout>
+
+<style>
+  #postTitle {
+/*    font-size: 2.5rem;*/
+  }
+
+  #info {
+    table {
+      border-spacing: 1rem 0rem;
+    }
+  }
+
+  #main {
+    table,th,td {
+      border: 1px solid #7f7f7f;
+      border-collapse: collapse;
+      padding: 0.5em;
+    }
+
+    thead {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+  }
+</style>
+
