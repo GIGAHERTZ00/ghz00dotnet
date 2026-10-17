@@ -6,7 +6,7 @@ const { frontmatter } = Astro.props;
 
 <Layout pageTitle={frontmatter.title}>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
-  <div id=info>
+  <div id="info">
     <h1 id="postTitle">{frontmatter.title}</h1>
     <table>
       <tbody>
@@ -45,7 +45,13 @@ const { frontmatter } = Astro.props;
 
   #info {
     table {
-      border-spacing: 1rem 0rem;
+      background-color: rgba(0, 0, 0, 0.2);
+      padding:          1rem;
+      font-family:      monospace;
+      border-spacing:   1rem 0rem;
+      border-top:       solid 0.1px black;
+      border-bottom:    solid 0.1px black;
+      margin-bottom:    2rem;
     }
   }
 
