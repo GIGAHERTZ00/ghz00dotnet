@@ -12,6 +12,8 @@
     "@astrojs/rss": "^4.0.19",
     "astro": "^6.4.8",
     "rehype-katex": "^7.0.1",
-    "remark-math": "^6.0.0"
+    "remark-breaks": "^4.0.0",
+    "remark-math": "^6.0.0",
+    "unist-util-visit": "^5.2.0"
   }
 }
